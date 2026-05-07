@@ -1,0 +1,85 @@
+###############################################################
+# for versions 2009-3-12 or higher
+###############################################################
+# Physical Parameters
+5000.0			# Re
+1.0			# Re_scale_factor
+-10.0			# Wi
+-10.0			# beta, the viscosity ratio
+-10.0			# b, b parameter in FENE-P
+-10.0			# Sc
+-10.0			# Ul_fac, typically, 2.0 for Pouiseuille, 1.0 for Couette
+# Geometrical Parameters
+64			# Nx, number of grid points in x direction in physical space
+81			# Ny, number of grid points in y direction in physical space
+64			# Nz, number of grid points in z direction in physical space
+-10.0		 	# Lx, if negative, Lx = 2*pi/alpha
+-10.0			# Lz, if negative, Lz = 2*pi/gamma
+1 			# alpha
+2 			# gamma
+-1.0			# a, the y coordinate of the bottom wall
+1.0			# b, the y coordinate of the top wall
+1.0			# geom_factor: Lx /= geom_factor; Lz /= geom_factor; and a and b are not affected
+# Time-stepping Parameters
+0.0			# t_start, time for initial condition
+30000.0			# t_end, time for finishing simulation
+1.0			# t_interval, time interval for storing data and postprocessing
+50.0			# t_stats0, starting time for calculating turbulence statistics
+100.0			# t_save, time interval for saving binary fields
+0.0 			# t_save_start, time to start saving binary fields
+30.0			# t_ckpt, time interval for check-pointing
+0.008			# dt_fix, fixed time step, specify negative value if using varying time steps
+0.002			# dt_min, minimum time step
+0.04			# dt_max, maximum time step
+0.50			# CFL_min, minimum CFL number
+0.70			# CFL_max, maximum CFL number
+# Viscoelastic DNS flags
+2			# baseflow: BaseFlow {Zero, PlaneCouette, Parabolic}
+1			# constraint: MeanConstraint  {PressureGradient, BulkVelocity}
+6			# timestepping: TimeStepMethod {CNFE1, CNAB2, CNRK2, SMRK2, SBDF1, SBDF2, SBDF3, SBDF4}
+4			# initstepping: TimeStepMethod {CNFE1, CNAB2, CNRK2, SMRK2, SBDF1, SBDF2, SBDF3, SBDF4}
+4			# nonlinearity: NonlinearMethod {Rotational, Convection, Divergence, SkewSymmetric, Alternating, Alternating_, LinearAboutField, LinearAboutProfile}
+0			# dealiasing:  Dealiasing {NoDealiasing, DealiasXZ, DealiasY, DealiasXYZ}
+1			# taucorrection: bool false = 0, true = 1
+1			# verbosity: Verbosity {Silent, PrintTicks, PrintTime, VerifyTauSolve, PrintAll}
+-10.0			# dPdx: if negative, determined by baseflow
+-10.0			# Ubulk: if negative, determined by baseflow
+0			# constitutiveeq: ConstitutiveEq {Newtonian, FENEP}
+0			# convectionterm: ConvectionTerm {Collocation}
+6			# veNd, note: this is not part of VEDNSFlags
+1			# initfieldstyle: InitFieldStyle {None, Binary, AsciiSeparate, AsciiCombined}
+# Lorentz force parameters; f_z = I * exp(-y/delta) * sin((2*pi*z/lambda_z)-(2*pi*t/T))
+0			# force_flag, type of force {NoForce, TravellingWave, Oscillatory}
+1			# wall_choice {Top, Bottom, Both}
+0.10			# I, force magnitude
+0.03			# delta, penetration length
+1.57080			# lambda_z, wavelength -- enabled only when force_flag is set to TravellingWave
+5			# T, time period (or frequency = 2*pi/T)
+# Noise Flags
+0 			# THIS SHOULD ALWAYS BE ZERO; noisedist, enum NoiseDistribution {NoNoise, Uniform, Normal}
+1			# noisetype, enum NoiseType {RandomForce, LLRandomStress}
+1000 			# seed, if 0 or negative, use the system clock
+0.0 			# sigma_fx
+0.0 			# sigma_fy
+0.0 			# sigma_fz
+0.0			# K
+# Others
+1			# is_print_wall_shear_rate: whether to print time-evolution of the wall shear rate into the designated output file
+#################Additional Information, disused in the code############################
+# Default settings for DNSFlags:
+#  //       Option type     Option name      Default value
+#  DNSFlags(MeanConstraint  constraint     = BulkVelocity,
+#	   TimeStepMethod  timestepping   = SBDF3,
+#	   TimeStepMethod  initstepping   = SMRK2,
+#	   NonlinearMethod nonlinearity   = SkewSymmetric, 
+#	   Dealiasing      dealiasing     = NoDealiasing,
+#	   bool            taucorrection  = true,
+#	   Verbosity       verbosity      = PrintTicks);
+# Requirements for initial steps of each time stepping algorithm
+#	CNFE1  == Crank-Nicolson Forward-Euler order 1   (no init steps needed)
+# 	CNAB2  == Crank-Nicolson Adams-Bashforth order 2 (needs 1 init steps)
+# 	CNRKn  == Crank-Nicolson Runge-Kutta order n     (no init steps needed)
+# 	SMRK2  == Spalart,Moser,R?, Runge-Kutta order 2  (no init steps needed)
+#	SBDFn  == Semimplicit backwards-differentiation order n (needs n-1 init steps)
+# 	See channelflow manual for detailed description of these algorithms
+# 	Note: CNFE1 and SBDF1 are the same algorithm.

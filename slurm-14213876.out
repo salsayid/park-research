@@ -1,0 +1,8 @@
+Error reading fftw-wisdom file /home/parklab/sayid/.fftw_wisdom, proceding without fftw-wisdom.
+Initializing the fields from initial conditions...
+Reminder: ignore the warning message sent by "DNSAlgorithm :: DNSAlgorithm" below about overridding flags_.baseflow settings.
+Reminder sent by "Simulator :: construct_Ubase".
+
+Error: interpolation toward lower resolutions in x and z dimension is not enabled at this point
+Error message sent by "Simulator :: adjust_field".
+

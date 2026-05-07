@@ -1,0 +1,25 @@
+# Parameters for the field:
+# geometrical parameters:
+64                       # Nx
+81                       # Ny
+64                       # Nz
+4                        # Nd
+6.283185307179586        # Lx; if negative, Lx can be inferred from alpha.
+3.141592653589793        # Lz; if negative, Lz can be inferred from gamma
+1                        # alpha; alpha*Lx = 2*pi.
+2                        # gamma; gamma*Lz = 2*pi.
+-1                       # a.
+1                        # b.
+0                        # fieldgeometry: 0--full channel; 1--top half channel; 2--bottom half channel.
+# physical parameters: (negative for those not apply)
+7000                     # Re
+1                        # Re_scale_factor.
+-10                      # Wi
+-10                      # visc_ratio, i.e. beta
+-10                      # b_para, i.e. b.
+-10                      # Sc; Artificial Diff = 1/(ReSc);
+-10                      # Ul_fac; 1/flow time scale = Ul_fac * U/l.
+0                        # Cv; traveling wave speed.
+0                        # Cv_shift; Cv += Cv_shift. Included just because of Wallefe's homotopy code output, in which Cv_shift = 4/3.
+1                        # field_factor; u/=field_factor.
+1                        # geom_factor; L/=geom_factor. For velocity field: Re_scale_fac = field_factor * geom_factor.
